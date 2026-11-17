@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Деталі спеціаліста — USVIDOM</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-nav">
+            <a href="index.html">Каталог</a>
+            <a href="about.html">Про проєкт</a>
+            <a href="admin.html">Адміністрування</a>
+        </nav>
+    </header>
+
+    <main class="site-main">
+        <nav class="breadcrumbs" aria-label="Хлібні крихти">
+            <a href="index.html">Головна</a> / <span>Олена Коваль</span>
+        </nav>
+
+        <section class="specialist-details">
+            <h2>Олена Коваль — Когнітивно-поведінкова терапія (КПТ)</h2>
+            <p class="specialist-bio">
+                Олена має вищу психологічну освіту та понад 6 років практичного досвіду у сфері когнітивно-поведінкової терапії. Допомагає впоратися з тривожними станами та вигоранням.
+            </p>
+        </section>
+
+        <section class="review-section">
+            <h3 class="review-section__title">Залишити відгук про консультацію</h3>
+            <form class="form">
+                <div class="form__field-group">
+                    <label class="form__label" for="visitor-name">Ваше ім'я:</label>
+                    <input class="form__input" type="text" id="visitor-name" name="name" required autocomplete="name">
+                </div>
+
+                <div class="form__field-group">
+                    <label class="form__label" for="visitor-email">Електронна пошта:</label>
+                    <input class="form__input" type="email" id="visitor-email" name="email" required autocomplete="email">
+                </div>
+
+                <fieldset class="form__fieldset">
+                    <legend class="form__legend">Оцінка якості консультації (від 1 до 5)</legend>
+                    <label><input type="radio" name="rating" value="1"> 1</label>
+                    <label><input type="radio" name="rating" value="2"> 2</label>
+                    <label><input type="radio" name="rating" value="3"> 3</label>
+                    <label><input type="radio" name="rating" value="4"> 4</label>
+                    <label><input type="radio" name="rating" value="5" checked> 5</label>
+                </fieldset>
+
+                <div class="form__field-group">
+                    <label class="form__label" for="visitor-comment">Ваш коментар або відгук:</label>
+                    <textarea class="form__textarea" id="visitor-comment" name="comment" maxlength="500"></textarea>
+                </div>
+
+                <div class="form__checkbox-group">
+                    <label>
+                        <input type="checkbox" name="agreement" required> Згоден(-на) з правилами публікації відгуків
+                    </label>
+                </div>
+
+                <button class="button button--primary" type="submit">Надіслати відгук</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Студія USVIDOM</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Адміністрування — USVIDOM</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-nav">
+            <a href="index.html">Каталог</a>
+            <a href="about.html">Про проєкт</a>
+            <a href="admin.html" aria-current="page">Адміністрування</a>
+        </nav>
+    </header>
+
+    <main class="site-main">
+        <h2>Панель адміністратора</h2>
+        
+        <table class="data-table">
+            <caption>Перелік активних спеціалістів та послуг студії USVIDOM</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Назва фахівця / послуги</th>
+                    <th scope="col">Категорія напряму</th>
+                    <th scope="col" class="data-table__num">Вартість (грн)</th>
+                    <th scope="col">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Олена Коваль</td>
+                    <td>КПТ</td>
+                    <td class="data-table__num">1500</td>
+                    <td><a href="admin-edit.html">Редагувати</a></td>
+                </tr>
+                <tr>
+                    <td>Олександр Мельник</td>
+                    <td>Тілесна терапія</td>
+                    <td class="data-table__num">1700</td>
+                    <td><a href="admin-edit.html">Редагувати</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section class="admin-form-section">
+            <h3>Додати нового спеціаліста до каталогу</h3>
+            <form class="form" id="item-form">
+                <fieldset class="form__fieldset">
+                    <legend class="form__legend">Основні дані спеціаліста</legend>
+                    
+                    <div class="form__field-group">
+                        <label class="form__label" for="title">ПІБ / Назва спеціаліста:</label>
+                        <input class="form__input form__field" type="text" id="title" name="title" required minlength="3" maxlength="100">
+                    </div>
+
+                    <div class="form__field-group">
+                        <label class="form__label" for="category">Категорія напряму:</label>
+                        <select class="form__select form__field" id="category" name="category" required>
+                            <option value="">-- Оберіть напрям терапії --</option>
+                            <option value="cbt">Когнітивно-поведінкова терапія</option>
+                            <option value="body">Тілесно-орієнтована терапія</option>
+                        </select>
+                    </div>
+
+                    <div class="form__field-group">
+                        <label class="form__label" for="price">Вартість сесії (грн):</label>
+                        <input class="form__input form__field" type="number" id="price" name="price" min="800" max="3000" step="100" required>
+                        <small class="form__hint" id="price-hint">Вкажіть суму в межах від 800 до 3000 грн з кроком 100.</small>
+                    </div>
+
+                    <div class="form__field-group">
+                        <label class="form__label" for="itemCode">Унікальний код / артикул позиції:</label>
+                        <input class="form__input form__field" type="text" id="itemCode" name="itemCode" pattern="[A-Z]{3}-\d{3}" required aria-describedby="code-hint">
+                        <small class="form__hint" id="code-hint">Формат: три великі латинські літери, дефіс і три цифри (наприклад, PSY-101).</small>
+                    </div>
+                </fieldset>
+
+                <div class="form__actions">
+                    <button class="button button--primary" type="submit">Додати елемент</button>
+                    <button class="button button--secondary" type="reset">Очистити форму</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Студія USVIDOM</p>
+    </footer>
+</body>
+</html>

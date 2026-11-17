@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Психологічна студія USVIDOM — Головна</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1 class="site-header__title">Психологічна студія «USVIDOM»</h1>
+        <p class="site-header__subtitle">Простір тілесних практик, психотерапії та ментального здоров'я (м. Буча)</p>
+        
+        <nav class="site-nav">
+            <a href="index.html" aria-current="page">Каталог</a>
+            <a href="about.html">Про проєкт</a>
+            <a href="admin.html">Адміністрування</a>
+        </nav>
+    </header>
+
+    <main class="site-main">
+        <section class="catalog">
+            <h2 class="catalog__title">Наші спеціалісти та послуги</h2>
+            
+            <div class="catalog__grid">
+                <!-- Картка 1 -->
+                <article class="card">
+                    <span class="card__badge" data-category="cbt">Когнітивно-поведінкова терапія</span>
+                    <h3 class="card__title"><a href="details.html">Олена Коваль</a></h3>
+                    <p class="card__text">Когнітивно-поведінкова терапія (КПТ)</p>
+                    <p class="card__price">1500 грн</p>
+                    <a class="card__link" href="details.html">Детальніше</a>
+                </article>
+
+                <!-- Картка 2 (недоступна, для перевірки :has()) -->
+                <article class="card" data-in-stock="false">
+                    <span class="card__badge" data-category="body">Тілесні практики</span>
+                    <h3 class="card__title">Олександр Мельник</h3>
+                    <p class="card__text">Тілесно-орієнтована терапія</p>
+                    <p class="card__price">1700 грн</p>
+                    <p class="card__status">Тимчасово немає офлайн-прийому</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Студія USVIDOM, Буча. Усі права захищено.</p>
+    </footer>
+</body>
+</html>
