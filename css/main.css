@@ -1,0 +1,434 @@
+/* ==========================================================================
+   USVIDOM DESIGN SYSTEM — Main Stylesheet
+   Архітектура каскадних шарів та дизайн-токени
+   ========================================================================== */
+
+@layer reset, base, components, utilities;
+
+
+/* ==========================================================================
+   1. RESET LAYER — Нормалізація та скидання стандартних стилів браузера
+   ========================================================================== */
+@layer reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body, h1, h2, h3, h4, p, ul, ol, figure, blockquote, dd, dl {
+    margin: 0;
+  }
+
+  body {
+    min-block-size: 100vh;
+    line-height: 1.5;
+  }
+
+  img {
+    max-inline-size: 100%;
+    block-size: auto;
+    display: block;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+}
+
+
+/* ==========================================================================
+   2. BASE LAYER — Токени дизайну, типографіка та глобальні теми
+   ========================================================================== */
+@layer base {
+  :root {
+    color-scheme: light dark;
+
+    /* --- Кольорові дизайн-токени (Світла тема за замовчуванням) --- */
+    --color-bg: #fbf8f3;
+    --color-card-bg: #ffffff;
+    --color-text: #1f2733;
+    --color-text-muted: #5c677d;
+    --color-accent: #c4682a;
+    --color-border: #e2d9ce;
+    --color-focus: #1d4ed8;
+    --color-error: #b91c1c;
+    --color-success: #15803d;
+
+    /* --- Типографіка --- */
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* --- Шкала відступів (Spacing Scale) --- */
+    --space-xs: 0.25rem;
+    --space-s:  0.5rem;
+    --space-m:  1rem;
+    --space-l:  2rem;
+    --space-xl: 3rem;
+
+    /* --- Радіуси та ефекти --- */
+    --radius-card:  12px;
+    --radius-field:  6px;
+    --shadow-sm:     0 4px 12px rgba(31, 39, 51, 0.05);
+  }
+
+  /* --- Темна тема за системним налаштуванням користувача --- */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg:       #141821;
+      --color-card-bg:  #1e2430;
+      --color-text:     #e8ebf1;
+      --color-text-muted: #94a3b8;
+      --color-accent:   #e07a1f;
+      --color-border:   #2d3748;
+      --color-focus:    #60a5fa;
+      --color-error:    #f87171;
+      --color-success:  #4ade80;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    padding: var(--space-m);
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100vh;
+  }
+
+  main {
+    flex: 1;
+    max-inline-size: 1000px;
+    inline-size: 100%;
+    margin-inline: auto;
+    padding-block: var(--space-l);
+  }
+
+  h1, h2, h3 {
+    color: var(--color-text);
+    margin-block-end: var(--space-s);
+  }
+
+  p {
+    margin-block-end: var(--space-m);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+
+/* ==========================================================================
+   3. COMPONENTS LAYER — Компоненти інтерфейсу за методологією BEM
+   ========================================================================== */
+@layer components {
+
+  /* --- Шапка та головна навігація сайту --- */
+  .site-header {
+    background-color: var(--color-card-bg);
+    border-block-end: 1px solid var(--color-border);
+    padding: var(--space-m) var(--space-l);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    margin-block-end: var(--space-l);
+    text-align: center;
+  }
+
+  .site-header__title {
+    font-size: 1.75rem;
+  }
+
+  .site-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .site-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-l);
+    margin-block-start: var(--space-m);
+  }
+
+  .site-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    padding-block: var(--space-xs);
+  }
+
+  .site-nav a[aria-current="page"] {
+    font-weight: 700;
+    color: var(--color-accent);
+    border-block-end: 2px solid var(--color-accent);
+  }
+
+  /* --- Футер (Підвал сайту) --- */
+  .site-footer {
+    text-align: center;
+    padding: var(--space-m);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    border-block-start: 1px solid var(--color-border);
+    margin-block-start: var(--space-xl);
+  }
+
+  /* --- Хлібні крихти з динамічними розділювачами через ::before --- */
+  .breadcrumbs {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-block-end: var(--space-m);
+  }
+
+  .breadcrumbs span::before,
+  .breadcrumbs a + a::before {
+    content: " / ";
+    color: var(--color-text-muted);
+  }
+
+  /* --- Каталог та картки спеціалістів --- */
+  .catalog__title {
+    margin-block-end: var(--space-l);
+  }
+
+  .catalog__grid {
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  .card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: var(--space-l);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+
+  /* Використання :has() для автоматичного затемнення недоступних карток */
+  .card:has([data-in-stock="false"]) {
+    opacity: 0.65;
+    background-color: color-mix(in srgb, var(--color-card-bg) 90%, var(--color-text-muted));
+  }
+
+  .card__badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-s);
+    border-radius: 20px;
+    background-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    color: var(--color-accent);
+    margin-block-end: var(--space-s);
+  }
+
+  .card__title a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .card__title a:hover {
+    color: var(--color-accent);
+  }
+
+  .card__price {
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    margin-block-start: var(--space-s);
+  }
+
+  .card__status {
+    font-size: 0.85rem;
+    color: var(--color-error);
+    font-weight: 600;
+    margin-block-start: var(--space-xs);
+  }
+
+  /* Обмеження довжини рядка тексту для читабельності (max-inline-size: 65ch) */
+  .about-content, .specialist-details {
+    max-inline-size: 65ch;
+  }
+
+  .about-text, .specialist-bio {
+    line-height: 1.6;
+    margin-block-end: var(--space-m);
+  }
+
+  /* --- Списки визначень та секція FAQ --- */
+  .definitions-list {
+    margin-block-end: var(--space-l);
+  }
+
+  .definitions-list dt {
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-block-start: var(--space-m);
+  }
+
+  .definitions-list dd {
+    margin-inline-start: 0;
+    color: var(--color-text-muted);
+  }
+
+  .faq-item {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-field);
+    padding: var(--space-m);
+    margin-block-end: var(--space-s);
+  }
+
+  .faq-summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .faq-item p {
+    margin-block-start: var(--space-s);
+    color: var(--color-text-muted);
+  }
+
+  /* --- Таблиці даних з чергуванням фону (:nth-child) --- */
+  .data-table {
+    inline-size: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-card-bg);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-block-end: var(--space-l);
+  }
+
+  .data-table caption {
+    font-weight: 700;
+    margin-block-end: var(--space-s);
+    text-align: start;
+  }
+
+  .data-table th, .data-table td {
+    padding: var(--space-m);
+    border-block-end: 1px solid var(--color-border);
+    text-align: start;
+  }
+
+  .data-table th {
+    background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-card-bg));
+  }
+
+  .data-table tbody tr:nth-child(even) {
+    background-color: color-mix(in srgb, var(--color-border) 25%, transparent);
+  }
+
+  .data-table__num {
+    text-align: end;
+  }
+
+  /* --- Форми, поля введення та інтерактивні стани --- */
+  .form {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: var(--space-l);
+    box-shadow: var(--shadow-sm);
+    max-inline-size: 600px;
+  }
+
+  .form__field-group {
+    margin-block-end: var(--space-m);
+  }
+
+  .form__label {
+    display: block;
+    font-weight: 600;
+    margin-block-end: var(--space-xs);
+  }
+
+  .form__input, .form__select, .form__textarea {
+    inline-size: 100%;
+    padding: var(--space-s) var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-field);
+    background-color: var(--color-card-bg);
+    color: var(--color-text);
+  }
+
+  .form__hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-block-start: var(--space-xs);
+  }
+
+  .form__fieldset {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-field);
+    padding: var(--space-m);
+    margin-block-end: var(--space-m);
+  }
+
+  .form__legend {
+    font-weight: 700;
+    padding-inline: var(--space-xs);
+    color: var(--color-accent);
+  }
+
+  .form__checkbox-group {
+    margin-block-end: var(--space-l);
+  }
+
+  /* --- Кнопки інтерфейсу --- */
+  .button {
+    padding: var(--space-s) var(--space-l);
+    border-radius: var(--radius-field);
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .button--primary {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .button--primary:hover {
+    opacity: 0.9;
+  }
+
+  .button--secondary {
+    background-color: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .form__actions {
+    display: flex;
+    gap: var(--space-m);
+  }
+
+  /* --- Спеціальні стани доступності та валідації --- */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Стилізація помилок введення після взаємодії користувача (:user-invalid) */
+  .form__input:user-invalid,
+  .form__select:user-invalid,
+  .form__textarea:user-invalid {
+    border-color: var(--color-error);
+    border-width: 2px;
+  }
+
+  /* Кастомізація акцентного кольору для елементів керування */
+  input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--color-accent);
+  }
+}
